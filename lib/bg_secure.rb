@@ -1,4 +1,5 @@
 require 'md5'
+require 'uri'
 
 module BgSecure
   # Create secure urls for Bit Gravity by passing the url, your Bit Gravity
