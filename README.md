@@ -9,6 +9,12 @@ Usage
 
 Create secure urls for Bit Gravity by passing the url, your Bit Gravity shared secret key, and an optional options hash.
 
+    BgSecure.url_for(url, secret, options = {})
+
+* url - Either a full url (http://example.com/path/file.ext) or a path (/path/file.ext) to the secure asset. The response will be returned the same as it was sent (with or without the host). A document relative path will cause an ArgumentError.
+* secret - Your shared secret key from BitGravity.
+* options - An optional hash of options (explained below).
+
 Valid options:
 
 * :expires - An object responding to :to_time, or and integer for seconds since UTC Epoch. If this option is not passed, evaluates to false, or if 0 is passed, the url will not expire.
@@ -36,6 +42,12 @@ Secure url that doesn't expire but allows only US access
     BgSecure.url_for('http://example.com/path/file.ext', 'secret', :allowed => 'US')
 
 > => "http://example.com/path/file.ext?e=0&a=US&h=0880d05de9eb8a67146473cbceca40e3"
+
+
+Contributing
+------------
+
+There are RSpec examples included with the plugin. Please spec any contributions and we will be happy to merge your changes.
 
 
 Copyright (c) 2008 Martin Emde / La Touraine, Inc.
