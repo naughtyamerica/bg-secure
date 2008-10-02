@@ -23,19 +23,19 @@ Secure url that doesn't expire
 
     BgSecure.url_for('http://example.com/path/file.ext', 'secret')
 
-> "http://example.com/path/file.ext?e=0&h=74bea39e4aa13f08a6fc862fe29574fc"
+> => "http://example.com/path/file.ext?e=0&h=74bea39e4aa13f08a6fc862fe29574fc"
 
 Secure url that expires 2 days from now (time will be converted to UTC)
 
     BgSecure.url_for('http://example.com/path/file.ext', 'secret', :expires => 2.days.from_now)
 
-> "http://example.com/path/file.ext?e=1234567890&h=74bea39e4aa13f08a6fc862fe29574fc"
+> => "http://example.com/path/file.ext?e=1234567890&h=74bea39e4aa13f08a6fc862fe29574fc"
 
 Secure url that doesn't expire but allows only US access
 
     BgSecure.url_for('http://example.com/path/file.ext', 'secret', :allowed => 'US')
 
-> "http://example.com/path/file.ext?e=0&a=US&h=0880d05de9eb8a67146473cbceca40e3"
+> => "http://example.com/path/file.ext?e=0&a=US&h=0880d05de9eb8a67146473cbceca40e3"
 
 
 Copyright (c) 2008 Martin Emde / La Touraine, Inc.
