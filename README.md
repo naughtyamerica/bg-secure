@@ -11,7 +11,7 @@ Create secure urls for Bit Gravity by passing the url, your Bit Gravity shared s
 
     BgSecure.url_for(url, secret, options = {})
 
-* url - Either a full url (http://example.com/path/file.ext) or a path (/path/file.ext) to the secure asset. The response will be returned the same as it was sent (with or without the host). A document relative path will cause an ArgumentError.
+* url - Either a full url (http://example.com/path/file.ext) or a path (/path/file.ext) to the secure asset. The response will be returned the same as it was sent (with or without the host). A document relative path will cause an ArgumentError. A kind_of URI::HTTP may also be passed.
 * secret - Your shared secret key from BitGravity.
 * options - An optional hash of options (explained below).
 

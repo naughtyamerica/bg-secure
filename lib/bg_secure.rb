@@ -8,7 +8,8 @@ module BgSecure
   # * url - Either a full url (http://example.com/path/file.ext) or a path
   # (/path/file.ext) to the secure asset. The response will be returned the
   # same as it was sent (with or without the host). A document relative
-  # path will cause an ArgumentError.
+  # path will cause an ArgumentError. A kind_of URI::HTTP may also be
+  # passed.
   # * secret - Your shared secret key from BitGravity.
   # * options - An optional hash of options (explained below).
   #
@@ -28,8 +29,8 @@ module BgSecure
   # overridden by :unlock or :allowed so please pass only one of these options.
   #
   def self.url_for(url, secret, options = {})
-    uri = URI.parse(url)
-    path = uri.path
+    url = URI.parse(url) unless url.is_a? URI::HTTP
+    path = url.path
 
     unless path =~ /^\/.+/
       raise ArgumentError, "Path [#{path}] is invalid for generating a BitGravity secure URL"
@@ -50,8 +51,8 @@ module BgSecure
     path << "&h=#{MD5.hexdigest(secret + path)}"
 
     begin
-      # Merges the uri if there is a host in the url that was passed
-      uri.merge(path).to_s
+      # Merges the url if there is a host in the url that was passed
+      url.merge(path).to_s
     rescue URI::BadURIError # "both URI are relative"
       # url in arguments was relative ("/path/file.ext") so just return our new relative path
       path
