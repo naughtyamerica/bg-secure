@@ -1,7 +1,7 @@
 BgSecure Plugin
 ===============
 
-Provides access methods for generating secure urls on BitGravity.
+Provides access methods for generating secure urls on [BitGravity]:http://bitgravity.com
 
 
 Usage
