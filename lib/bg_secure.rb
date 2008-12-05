@@ -2,6 +2,13 @@ require 'md5'
 require 'uri'
 
 module BgSecure
+  @@secret = nil
+  # Call init with your secret key in config/initializer/bitgravity.rb
+  def self.init(secret)
+    @@secret = secret 
+    logger.debug "BgSecure initialized with a BitGravity key"
+  end
+
   # Create secure urls for Bit Gravity by passing the url, your Bit Gravity
   # shared secret key, and an optional options hash.
   #
@@ -28,7 +35,7 @@ module BgSecure
   # "US,CA" used to indicate disallowed countries. This option will be
   # overridden by :unlock or :allowed so please pass only one of these options.
   #
-  def self.url_for(url, secret, options = {})
+  def self.url_for(url, options = {})
     url = URI.parse(url) unless url.is_a? URI::HTTP
     path = url.path
 
@@ -48,7 +55,7 @@ module BgSecure
       path << "&d=#{country_options(options[:disallowed])}"
     end
 
-    path << "&h=#{MD5.hexdigest(secret + path)}"
+    path << "&h=#{MD5.hexdigest(@@secret + path)}"
 
     begin
       # Merges the url if there is a host in the url that was passed
