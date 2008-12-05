@@ -6,7 +6,6 @@ module BgSecure
   # Call init with your secret key in config/initializer/bitgravity.rb
   def self.init(secret)
     @@secret = secret 
-    logger.debug "BgSecure initialized with a BitGravity key"
   end
 
   # Create secure urls for Bit Gravity by passing the url, your Bit Gravity
