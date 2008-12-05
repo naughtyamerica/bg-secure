@@ -6,7 +6,7 @@ describe BgSecure, ".url_for" do
     @base_url = "http://example.com#{@path}"
     @time = 1234567890
 
-    BgSecure.init(@secret)
+    BgSecure.init('secret')
   end
 
   it "raises an argument error if url is relative" do
@@ -41,7 +41,7 @@ describe BgSecure, ".url_for" do
 
   it "adds the correct hash to the url" do
     url = BgSecure.url_for(@base_url, :expires => @time)
-    url.should =~ /&h=#{ MD5.hexdigest(@secret + @path + "?e=#{@time}") }$/
+    url.should =~ /&h=#{ MD5.hexdigest('secret' + @path + "?e=#{@time}") }$/
   end
 
   it "responds with a url without the host if host is not passed" do
